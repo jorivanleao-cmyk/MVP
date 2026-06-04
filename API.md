@@ -863,6 +863,5 @@ curl -X POST http://localhost:3333/calendar/reconcile \
 
 4. **Para produção:**
    - Use HTTPS.
-   - Proteja o token de admin.
    - Configure CORS apropriadamente.
    - Use variáveis de ambiente para tokens e URLs.
