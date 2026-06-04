@@ -388,4 +388,3 @@ Adicione chamadas `fetch` em `public/app.js` e mapeie os dados para componentes 
 
 ---
 
-Se precisar, posso também criar um `README` separado para documentação de API em formato OpenAPI/Swagger ou gerar exemplos de `curl` para cada rota.
