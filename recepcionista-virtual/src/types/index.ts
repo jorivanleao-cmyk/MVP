@@ -11,18 +11,18 @@ export type AIIntent =
   | 'cancelar'
   | 'falar_com_humano'
   | 'caso_sensivel'
-  | 'fora_do_escopo';
+  | 'fora_do_escopo'
 
 export interface AIAnalysisResponse {
-  intent: AIIntent;
-  reply: string;
+  intent: AIIntent
+  reply: string
   data: {
-    service?: string | null;
-    clientName?: string | null;
-    preferredDate?: string | null;
-    preferredPeriod?: string | null;
-  };
-  requiresHuman: boolean;
+    service?: string | null
+    clientName?: string | null
+    preferredDate?: string | null
+    preferredPeriod?: string | null
+  }
+  requiresHuman: boolean
 }
 
 export const ConversationStatuses = {
@@ -30,10 +30,10 @@ export const ConversationStatuses = {
   HUMAN_TAKEOVER: 'human_takeover',
   WAITING_CONFIRMATION: 'waiting_confirmation',
   CANCELLED: 'cancelled',
-} as const;
+} as const
 
 export const MessageFromValues = {
   CLIENT: 'client',
   AI: 'ai',
   HUMAN: 'human',
-} as const;
+} as const

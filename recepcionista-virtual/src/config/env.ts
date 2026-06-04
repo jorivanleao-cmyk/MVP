@@ -1,10 +1,10 @@
-import dotenv from 'dotenv';
-import path from 'path';
+import dotenv from 'dotenv'
+import path from 'path'
 
-dotenv.config({ path: path.resolve(process.cwd(), '.env') });
+dotenv.config({ path: path.resolve(process.cwd(), '.env') })
 
 function getEnv(key: string, fallback = ''): string {
-  return process.env[key] ?? fallback;
+  return process.env[key] ?? fallback
 }
 
 export const env = {
@@ -13,15 +13,26 @@ export const env = {
   databaseUrl: getEnv('DATABASE_URL', 'file:./dev.db'),
   adminToken: getEnv('ADMIN_TOKEN', 'dev-admin-token'),
   businessName: getEnv('BUSINESS_NAME', 'Clínica Estética Modelo'),
-  businessAddress: getEnv('BUSINESS_ADDRESS', 'Rua Exemplo, nº 100, Goiânia - GO'),
+  businessAddress: getEnv(
+    'BUSINESS_ADDRESS',
+    'Rua Exemplo, nº 100, Goiânia - GO',
+  ),
   businessHours: getEnv('BUSINESS_HOURS', 'Segunda a sexta, das 08h às 18h'),
   evolutionApiUrl: getEnv('EVOLUTION_API_URL'),
   evolutionApiKey: getEnv('EVOLUTION_API_KEY'),
   evolutionInstanceName: getEnv('EVOLUTION_INSTANCE_NAME'),
   geminiApiKey: getEnv('GEMINI_API_KEY'),
+  geminiApiUrl: getEnv('GEMINI_API_URL'),
+  geminiModel: getEnv('GEMINI_MODEL', 'gemini-text-bison-001'),
   googleClientId: getEnv('GOOGLE_CLIENT_ID'),
   googleClientSecret: getEnv('GOOGLE_CLIENT_SECRET'),
   googleRedirectUri: getEnv('GOOGLE_REDIRECT_URI'),
+  googleProjectId: getEnv('GOOGLE_PROJECT_ID'),
+  googleProjectLocation: getEnv('GOOGLE_PROJECT_LOCATION', 'us-central1'),
   googleCalendarId: getEnv('GOOGLE_CALENDAR_ID', 'primary'),
-  allowedOrigins: getEnv('ALLOWED_ORIGINS', 'http://localhost:3333').split(',').map((origin) => origin.trim()).filter(Boolean),
-};
+  googleTimezone: getEnv('GOOGLE_TIMEZONE', 'America/Sao_Paulo'),
+  allowedOrigins: getEnv('ALLOWED_ORIGINS', 'http://localhost:3333')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+}

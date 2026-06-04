@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
@@ -8,15 +8,24 @@
   </head>
   <body>
     <div class="container">
-      <header>
-        <h1>Painel de Atendimento Humano</h1>
-        <p>Use seu token administrativo para gerenciar conversas e agendamentos.</p>
+      <header class="app-header">
+        <div>
+          <p class="app-label">Recepcionista Virtual</p>
+          <h1><span class="icon icon-phone"></span>Atendimento Humano</h1>
+        </div>
+        <div class="status-clock" id="systemClock">
+          <span class="icon icon-clock"></span>00:00
+        </div>
       </header>
 
-      <section id="loginSection" class="card">
+      <section id="loginSection" class="glass-card">
         <h2>Autenticação</h2>
         <p>Informe o token administrativo para acessar o painel.</p>
-        <input id="tokenInput" type="password" placeholder="Token administrativo" />
+        <input
+          id="tokenInput"
+          type="password"
+          placeholder="Token administrativo"
+        />
         <button id="loginButton">Entrar</button>
         <div id="loginError" class="error"></div>
       </section>
@@ -27,17 +36,184 @@
           <button id="logoutButton" class="secondary">Sair</button>
         </div>
 
-        <div class="grid">
-          <div class="card conversation-card">
-            <h2>Conversas</h2>
-            <div id="conversationList"></div>
+        <div class="dashboard-content">
+          <div id="calendarSection" class="dashboard-section active-section">
+            <div class="calendar-card card">
+              <h2><span class="icon icon-calendar"></span>Google Calendar</h2>
+              <p id="calendarStatusText">
+                Verificando conexão com o Google Calendar...
+              </p>
+              <div class="button-row calendar-buttons">
+                <button id="connectCalendarButton">
+                  <span class="icon icon-calendar"></span>Conectar
+                </button>
+                <button id="refreshCalendarButton" class="secondary">
+                  <span class="icon icon-refresh"></span>Atualizar
+                </button>
+                <button id="reconcileCalendarButton" class="secondary">
+                  <span class="icon icon-link"></span>Reconectar
+                </button>
+              </div>
+
+              <div id="calendarError" class="error"></div>
+              <div id="calendarInfo" class="calendar-info"></div>
+
+              <h3>Próximos eventos</h3>
+              <div id="calendarEventList"></div>
+
+              <h3>Criar evento</h3>
+              <input
+                id="calendarSummary"
+                type="text"
+                placeholder="Título do evento"
+              />
+              <textarea
+                id="calendarDescription"
+                placeholder="Descrição do evento"
+              ></textarea>
+              <div class="grid calendar-inputs">
+                <input id="calendarDate" type="date" />
+                <input id="calendarStartTime" type="time" />
+                <input id="calendarEndTime" type="time" />
+              </div>
+              <button id="createCalendarEventButton">Criar evento</button>
+            </div>
           </div>
 
-          <div class="card appointment-card">
-            <h2>Agendamentos</h2>
-            <div id="appointmentList"></div>
+          <div id="conversationSection" class="dashboard-section">
+            <div class="card conversation-card">
+              <h2><span class="icon icon-chat"></span>Conversas</h2>
+              <div id="conversationList"></div>
+            </div>
+          </div>
+
+          <div id="appointmentSection" class="dashboard-section">
+            <div class="card appointment-card">
+              <h2><span class="icon icon-list"></span>Agendamentos</h2>
+
+              <div class="form-grid">
+                <div class="subcard">
+                  <h3>Novo agendamento</h3>
+                  <div class="form-group">
+                    <label for="appointmentClientSelect">Cliente</label>
+                    <select id="appointmentClientSelect"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="appointmentServiceSelect">Serviço</label>
+                    <select id="appointmentServiceSelect"></select>
+                  </div>
+                  <div class="form-group">
+                    <label for="appointmentDateInput">Data</label>
+                    <input id="appointmentDateInput" type="date" />
+                  </div>
+                </div>
+                <div class="subcard">
+                  <h3>Detalhes</h3>
+                  <div class="form-group">
+                    <label for="appointmentStartInput">Início</label>
+                    <input id="appointmentStartInput" type="time" />
+                  </div>
+                  <div class="form-group">
+                    <label for="appointmentEndInput">Fim</label>
+                    <input id="appointmentEndInput" type="time" />
+                  </div>
+                  <div class="form-group">
+                    <label for="appointmentNotes">Notas</label>
+                    <textarea
+                      id="appointmentNotes"
+                      placeholder="Notas do agendamento"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+
+              <button id="createAppointmentButton">Criar agendamento</button>
+            </div>
+
+            <div class="grid appointment-subgrid">
+              <div class="card service-card">
+                <h3><span class="icon icon-gear"></span>Serviços</h3>
+                <div class="form-group">
+                  <input
+                    id="serviceName"
+                    type="text"
+                    placeholder="Nome do serviço"
+                  />
+                </div>
+                <div class="form-group">
+                  <input
+                    id="serviceDescription"
+                    type="text"
+                    placeholder="Descrição"
+                  />
+                </div>
+                <div class="form-group small-inputs">
+                  <input
+                    id="serviceDuration"
+                    type="number"
+                    placeholder="Duração (min)"
+                  />
+                  <input
+                    id="servicePrice"
+                    type="number"
+                    placeholder="Preço"
+                    step="0.01"
+                  />
+                </div>
+                <div class="form-group checkbox-group">
+                  <label
+                    ><input
+                      id="serviceRequiresEvaluation"
+                      type="checkbox"
+                      checked
+                    />
+                    Requer avaliação</label
+                  >
+                </div>
+                <button id="createServiceButton">Salvar serviço</button>
+                <div id="serviceList"></div>
+              </div>
+
+              <div class="card client-card">
+                <h3><span class="icon icon-user"></span>Clientes</h3>
+                <div class="form-group">
+                  <input id="clientPhone" type="text" placeholder="Telefone" />
+                </div>
+                <div class="form-group">
+                  <input id="clientName" type="text" placeholder="Nome" />
+                </div>
+                <div class="form-group">
+                  <input id="clientEmail" type="email" placeholder="Email" />
+                </div>
+                <button id="createClientButton">Salvar cliente</button>
+                <div id="clientList"></div>
+              </div>
+            </div>
+
+            <div class="card appointment-card">
+              <h3>Lista de agendamentos</h3>
+              <div id="appointmentList"></div>
+            </div>
           </div>
         </div>
+
+        <nav class="tab-bar">
+          <button class="tab-button active" data-tab="calendar">
+            <span class="icon icon-calendar"></span>
+            <span class="tab-text">Calendário<small>Eventos</small></span>
+            <span class="tab-badge" id="calendarBadge">0</span>
+          </button>
+          <button class="tab-button" data-tab="conversations">
+            <span class="icon icon-chat"></span>
+            <span class="tab-text">Conversas<small>Mensagens</small></span>
+            <span class="tab-badge" id="conversationBadge">0</span>
+          </button>
+          <button class="tab-button" data-tab="appointments">
+            <span class="icon icon-list"></span>
+            <span class="tab-text">Agendamentos<small>Visão geral</small></span>
+            <span class="tab-badge" id="appointmentBadge">0</span>
+          </button>
+        </nav>
       </section>
     </div>
 
@@ -53,7 +229,10 @@
           <button class="takeoverButton">Assumir</button>
           <button class="releaseButton secondary">Liberar</button>
         </div>
-        <textarea class="replyInput" placeholder="Escrever resposta humana..."></textarea>
+        <textarea
+          class="replyInput"
+          placeholder="Escrever resposta humana..."
+        ></textarea>
         <button class="replyButton">Enviar resposta</button>
       </div>
     </template>

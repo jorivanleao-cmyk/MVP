@@ -43,6 +43,10 @@ http://localhost:3333/admin
 - `helmet` e `express-rate-limit` ajudam a reduzir riscos de rede
 - JSON body limitado a 10KB
 - Admin UI usa `localStorage` para manter token do usuário
+- O painel administrativo pode iniciar a conexão com o Google Calendar via OAuth
+- O painel também lista próximos eventos do Google Calendar e permite criar eventos diretamente no calendário
+- A lista de eventos mostra o `eventId` retornado pelo Google e sinaliza se ele está vinculado a um agendamento do sistema
+- Inclui reconciliação automática de eventos órfãos, para vincular eventos do Google a agendamentos existentes
 
 ## Observações
 

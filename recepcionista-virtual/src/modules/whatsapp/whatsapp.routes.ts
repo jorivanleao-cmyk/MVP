@@ -1,8 +1,8 @@
-import { Router } from 'express';
-import { handleIncomingWebhook } from './whatsapp.controller';
+import { Router } from 'express'
+import { handleIncomingWebhook } from './whatsapp.controller'
 
-const router = Router();
+const router = Router()
 
-router.post('/whatsapp', handleIncomingWebhook);
+router.post('/whatsapp', handleIncomingWebhook)
 
-export default router;
+export default router
