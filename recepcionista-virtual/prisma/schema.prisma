@@ -19,29 +19,29 @@ model Company {
 }
 
 model Client {
-  id            Int            @id @default(autoincrement())
+  id            Int           @id @default(autoincrement())
   name          String?
-  phone         String         @unique
+  phone         String        @unique
   email         String?
-  createdAt     DateTime       @default(now())
-  updatedAt     DateTime       @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
   companyId     Int
-  company       Company        @relation(fields: [companyId], references: [id])
+  company       Company       @relation(fields: [companyId], references: [id])
   conversations Conversation[]
   appointments  Appointment[]
 }
 
 model Service {
-  id                 Int           @id @default(autoincrement())
-  name               String        @unique
-  description        String
-  durationMinutes    Int
-  priceFrom          Float
-  requiresEvaluation Boolean       @default(true)
-  active             Boolean       @default(true)
-  companyId          Int
-  company            Company       @relation(fields: [companyId], references: [id])
-  appointments       Appointment[]
+  id                Int          @id @default(autoincrement())
+  name              String       @unique
+  description       String
+  durationMinutes   Int
+  priceFrom         Float
+  requiresEvaluation Boolean     @default(true)
+  active            Boolean      @default(true)
+  companyId         Int
+  company           Company      @relation(fields: [companyId], references: [id])
+  appointments      Appointment[]
 }
 
 model Conversation {
@@ -68,18 +68,18 @@ model Message {
 }
 
 model Appointment {
-  id            Int      @id @default(autoincrement())
+  id            Int       @id @default(autoincrement())
   clientId      Int
   serviceId     Int
   googleEventId String?
   date          DateTime
   startTime     String
   endTime       String
-  status        String   @default("pending")
+  status        String    @default("pending")
   notes         String?
-  createdAt     DateTime @default(now())
-  client        Client   @relation(fields: [clientId], references: [id])
-  service       Service  @relation(fields: [serviceId], references: [id])
+  createdAt     DateTime  @default(now())
+  client        Client    @relation(fields: [clientId], references: [id])
+  service       Service   @relation(fields: [serviceId], references: [id])
   companyId     Int
-  company       Company  @relation(fields: [companyId], references: [id])
+  company       Company   @relation(fields: [companyId], references: [id])
 }

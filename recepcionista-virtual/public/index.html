@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Recepcionista Virtual</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Painel de Atendimento Humano</h1>
+        <p>Use seu token administrativo para gerenciar conversas e agendamentos.</p>
+      </header>
+
+      <section id="loginSection" class="card">
+        <h2>Autenticação</h2>
+        <p>Informe o token administrativo para acessar o painel.</p>
+        <input id="tokenInput" type="password" placeholder="Token administrativo" />
+        <button id="loginButton">Entrar</button>
+        <div id="loginError" class="error"></div>
+      </section>
+
+      <section id="dashboard" class="hidden">
+        <div class="toolbar">
+          <button id="refreshButton">Atualizar dados</button>
+          <button id="logoutButton" class="secondary">Sair</button>
+        </div>
+
+        <div class="grid">
+          <div class="card conversation-card">
+            <h2>Conversas</h2>
+            <div id="conversationList"></div>
+          </div>
+
+          <div class="card appointment-card">
+            <h2>Agendamentos</h2>
+            <div id="appointmentList"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <template id="conversationTemplate">
+      <div class="conversation-item">
+        <div class="conversation-header">
+          <strong class="conversation-phone"></strong>
+          <span class="conversation-status"></span>
+        </div>
+        <p class="conversation-client"></p>
+        <div class="conversation-messages"></div>
+        <div class="button-row">
+          <button class="takeoverButton">Assumir</button>
+          <button class="releaseButton secondary">Liberar</button>
+        </div>
+        <textarea class="replyInput" placeholder="Escrever resposta humana..."></textarea>
+        <button class="replyButton">Enviar resposta</button>
+      </div>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
